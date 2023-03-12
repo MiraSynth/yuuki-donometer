@@ -29,6 +29,6 @@ jobs:
         prerelease: true
         title: "Development Build"
         files: |
-          ./bin/go-yuuki.exe
+          ./bin/goyuuki.exe
      
 
