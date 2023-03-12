@@ -59,8 +59,10 @@ Remember to uncheck the following in the OBS Browser Source
 - Refresh browser when scene becomes active
 
 > ***Do not close this Application, just minimize it!***
+
 <br />
 ---
 <br />
 <br />
+
 Written by [@MiraSynth](https://www.twitter.com/mirasynth), for [Yuuki](https://www.twitter.com/bananyuuki) with love! <3
