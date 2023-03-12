@@ -1,2 +1,2 @@
 build:
-	go build -o bin/go-yuuki.exe
+	env GOOS=windows GOARCH=amd64 go build -o bin/goyuuki.exe
