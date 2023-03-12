@@ -15,9 +15,9 @@ A little app that connect to GoFundMe, gets donation data and displays a meter a
 - Go to the [latest release](https://github.com/MiraSynth/yuuki-donometer/releases/tag/latest) page.
 - Download the `goyuuki.exe` file.
 - Double click the file to run it.
-- When windows defeder complains, click on `More info` text link and then the `Run anyway` button.
-- Windows Firewall will ask you to allow network access, click th e`Allow access` button.
-- A command line will appear, follow it's instruction.
+- When windows defender complains, click on `More info` text link and then the `Run anyway` button.
+- Windows Firewall will ask you to allow network access, click the `Allow access` button.
+- A command line will appear, follow it's instructions.
 
 <br />
 
