@@ -61,7 +61,9 @@ Remember to uncheck the following in the OBS Browser Source
 > ***Do not close this Application, just minimize it!***
 
 <br />
+
 ---
+
 <br />
 <br />
 
