@@ -19,6 +19,8 @@ A little app that connect to GoFundMe, gets donation data and displays a meter a
 - Windows Firewall will ask you to allow network access, click th e`Allow access` button.
 - A command line will appear, follow it's instruction.
 
+<br />
+
 ## Pages
 ### *Alert Box*
 Copy the url into an OBS browser source.
