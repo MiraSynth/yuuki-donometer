@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <style>
+            :root {
+                --meter-height: 3em;
+                --meter-color: #ffb9ea;
+                --meter-progress-color: #ff61d0;
+                --meter-text-color: #000000;
+                --meter-text-size: 0.8em;
+            }
+
+            * {
+                font-family: "LatoWeb", sans-serif;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            
+            h1, h2, h3, h4, h5 {
+                color: var(--meter-text-color);
+            }
+
+            progress {
+                text-align: center;
+                height: var(--meter-height);
+                margin: auto;
+                -webkit-appearance: none;
+                border: none;
+                position: relative;
+                display: block;
+                width: auto;
+            }
+
+            progress:before {
+                content: attr(data-label);
+                color: var(--meter-text-color);
+                font-size: var(--meter-text-size);
+                vertical-align: 0;
+                position: absolute;
+                top: 40%;
+                left: 0;
+                right: 0;
+            }
+
+            progress::-webkit-progress-bar {
+                background-color: var(--meter-color);
+            }
+
+            progress::-webkit-progress-value {
+                background-color: var(--meter-progress-color);
+            }
+        </style>
+    </head>
+    <body>
+        <!--<h1>{{title}}</h1>-->
+        <progress max="39740" value="0" data-label="Yuukis Goal"></progress>
+
+        <script type="text/javascript">
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+
+                // These options are needed to round to whole numbers if that's what you want.
+                minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+                maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+            });
+
+            async function getData() {
+                const request = await fetch("http://localhost:8969/api/info");
+                const data = await request.json();
+
+                const raised =  data.references.counts.amount_raised_unattributed;
+
+                const progress = document.querySelector("progress");
+                progress.setAttribute("data-label", `Donated ${formatter.format(raised)} of ${formatter.format(39740)}`);
+                progress.value = data.references.counts.amount_raised_unattributed;
+            }
+
+            (async function() {
+                setInterval(async () => {
+                    await getData();
+                }, 120 * 1000);
+
+                await getData()
+            })()
+        </script>
+    </body>
+</html>

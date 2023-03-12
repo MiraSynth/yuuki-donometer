@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <style>
+            :root {
+                --alert-text-color: #ffffff;
+                --alert-text-size: 3em;
+            }
+
+            * {
+                font-family: "LatoWeb", sans-serif;
+            }
+
+            h1, h2, h3, h4, h5 {
+                color: var(--alert-text-color);
+            }
+
+            .anim-bg {
+                background-image: url("http://localhost:8969/assets/headpat-yuuki.gif");
+            }
+
+            div {
+                width: 500px;
+                height: 500px;
+                background-size: cover;
+                margin: auto;
+            }
+
+            span {
+                display: block;
+                width: 100%;
+                text-align: center;
+                font-size: var(--alert-text-size);
+                color: var(--alert-text-color);
+            }
+
+            .alert {
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.5s linear;
+            }
+
+            .alert-show {
+                visibility: visible;
+                opacity: 1;
+                transition: all 0.5s linear;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="alert">
+            <div class="anim-bg"></div>
+            <span class="dono-label">{{donoText}}</span>
+        </div>
+
+        <audio id="player">
+            <source src="http://localhost:8969/assets/banana.mp3" type="audio/mp3">
+        </audio>
+
+        <script type="text/javascript">
+            const formatter = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+
+                // These options are needed to round to whole numbers if that's what you want.
+                minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+                maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+            });
+
+            const soundAlert = document.querySelector("#player");
+
+            var donoTextPrev = window.location.search.toLowerCase().includes("ignorecache") ? "" : localStorage.getItem('donoTextPrev');
+            var donoText = "";
+            var hideContext = 0;
+            
+            function showAlert(message) {
+                donoText = message;
+
+                if (donoTextPrev !== donoText) {
+
+                    if (hideContext) {
+                        clearTimeout(hideContext);
+                        hideContext = 0
+                    }
+
+                    donoTextPrev = donoText;
+                    localStorage.setItem('donoTextPrev', donoTextPrev);
+                    soundAlert.muted = true;
+                    soundAlert.pause();
+                    soundAlert.currentTime = 0;
+
+                    document.querySelector(".dono-label").innerText = donoText;
+                    document.querySelector(".alert").classList.add("alert-show");
+
+                    soundAlert.play();
+                    soundAlert.muted = false;
+                    
+                    hideContext = setTimeout(() => {
+                        document.querySelector(".alert").classList.remove("alert-show");
+                    }, 19000);
+                }
+            }
+
+            async function getData() {
+                const request = await fetch("http://localhost:8969/api/donations");
+                const data = await request.json();
+
+                const name =  data.references.donations[0].name;
+                const amount =  data.references.donations[0].amount;
+
+                const text = `${name} donated ${formatter.format(amount)}`;
+
+                return text;
+            }
+
+            (async function() {
+                setInterval(async () => {
+                    const data = await getData();
+                    showAlert(data);
+                }, 120 * 1000);
+
+                const data = await getData();
+                await showAlert(data);
+            })();
+        </script>
+    </body>
+</html>
