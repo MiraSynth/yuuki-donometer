@@ -10,6 +10,13 @@ A little app that connect to GoFundMe, gets donation data and displays a meter a
 
 <br />
 
+## Installing
+- Go to the [latest release](https://github.com/MiraSynth/yuuki-donometer/releases/tag/latest) page
+- Download the `goyuuki.exe` file
+- Double click the file to run it
+- When windows defeder complains, click on `More info` and then `Run anyway`
+- A command line will appear, follow it's instruction.
+
 ## Pages
 ### *Alert Box*
 Copy the url into an OBS browser source.
