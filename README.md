@@ -67,4 +67,4 @@ Remember to uncheck the following in the OBS Browser Source
 
 Written by [@MiraSynth](https://www.twitter.com/mirasynth), for [Yuuki](https://www.twitter.com/bananyuuki) with love! <3
 
-Tested by [@TheGhostieToast](https://github.com/GhostieMecha)
+Tested by the lovely [@TheGhostieToast](https://github.com/GhostieMecha)
